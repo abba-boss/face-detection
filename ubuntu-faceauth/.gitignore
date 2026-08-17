@@ -1,0 +1,39 @@
+# Ubuntu FaceAuth — git exclusions
+
+# ── Biometric data (NEVER commit) ───────────────────────────────────────
+data/embeddings/
+data/*.log
+data/
+
+# ── InsightFace model cache ──────────────────────────────────────────────
+~/.insightface/
+
+# ── Python artefacts ────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# ── Virtual environments ─────────────────────────────────────────────────
+.venv/
+venv/
+env/
+
+# ── Testing / coverage ───────────────────────────────────────────────────
+.pytest_cache/
+.coverage
+htmlcov/
+
+# ── IDE files ────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ── OS files ─────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db

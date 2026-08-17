@@ -1,0 +1,52 @@
+# ============================================================
+# Ubuntu FaceAuth - Git Ignore
+# ============================================================
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Test / tooling caches
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Runtime logs
+*.log
+data/faceauth.log
+ubuntu-faceauth/data/*.log
+
+# Face embeddings / biometric data
+data/embeddings/
+ubuntu-faceauth/data/embeddings/
+
+# FaceAuth databases
+data/*.db
+data/*.sqlite
+data/*.sqlite3
+ubuntu-faceauth/data/*.db
+ubuntu-faceauth/data/*.sqlite
+ubuntu-faceauth/data/*.sqlite3
+
+# InsightFace / model caches
+.insightface/
+models/
+
+# OS/editor files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# Local environment/config secrets
+.env
+.env.*
+!.env.example
