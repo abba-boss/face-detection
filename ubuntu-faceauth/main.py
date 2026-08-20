@@ -150,8 +150,9 @@ def build_parser() -> argparse.ArgumentParser:
         help="InsightFace model (default: buffalo_sc)",
     )
 
-    # ── list ────────────────────────────────────────────────────────────
-    sub.add_parser("list", help="List enrolled users")
+    # ── list / users ─────────────────────────────────────────────────────
+    sub.add_parser("list",  help="List enrolled users")
+    sub.add_parser("users", help="List enrolled users (alias for 'list')")
 
     # ── version ─────────────────────────────────────────────────────────
     sub.add_parser("version", help="Show version and package info")
@@ -272,8 +273,8 @@ def main() -> int:
 
     store = FaceStore(settings)
 
-    # ── list ─────────────────────────────────────────────────────────────
-    if args.command == "list":
+    # ── list / users ─────────────────────────────────────────────────────
+    if args.command in ("list", "users"):
         users = store.list_users()
 
         if users:
