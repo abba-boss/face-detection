@@ -53,6 +53,7 @@ from app.security import get_logger
 from app.storage import FaceStore
 from app.auth import AuthSession, AuthOutcome, HeadlessAuthSession
 from app.doctor import run_doctor
+from app.logs import run_logs
 
 __version__ = "1.0.0"
 
@@ -162,6 +163,16 @@ def build_parser() -> argparse.ArgumentParser:
 
     # ── status ──────────────────────────────────────────────────────────
     sub.add_parser("status", help="Show current configuration and enrollment")
+
+    # ── logs ────────────────────────────────────────────────────────────
+    logs_p = sub.add_parser("logs", help="Show recent authentication events")
+    logs_p.add_argument(
+        "--limit",
+        type=int,
+        default=20,
+        metavar="N",
+        help="Number of recent events to show (default: 20)",
+    )
 
     # ── liveness ─────────────────────────────────────────────────────────
     live_p = sub.add_parser(
@@ -330,6 +341,10 @@ def main() -> int:
         print(f"  enrolled   : {len(users)} user(s)"
               + (f" — {', '.join(users)}" if users else ""))
         return 0
+
+    # ── logs ─────────────────────────────────────────────────────────────
+    if args.command == "logs":
+        return run_logs(settings.log_file, limit=getattr(args, "limit", 20))
 
     # ── delete ───────────────────────────────────────────────────────────
     if args.command == "delete":
