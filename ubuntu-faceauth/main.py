@@ -159,6 +159,9 @@ def build_parser() -> argparse.ArgumentParser:
     # ── doctor ──────────────────────────────────────────────────────────
     sub.add_parser("doctor", help="Run system diagnostics")
 
+    # ── status ──────────────────────────────────────────────────────────
+    sub.add_parser("status", help="Show current configuration and enrollment")
+
     # ── liveness ─────────────────────────────────────────────────────────
     live_p = sub.add_parser(
         "liveness",
@@ -313,6 +316,19 @@ def main() -> int:
     # ── doctor ───────────────────────────────────────────────────────────
     if args.command == "doctor":
         return run_doctor(settings, store)
+
+    # ── status ───────────────────────────────────────────────────────────
+    if args.command == "status":
+        users = store.list_users()
+        print(f"  version    : {__version__}")
+        print(f"  model      : {settings.insightface_model_name}")
+        print(f"  camera     : /dev/video{settings.camera_device}")
+        print(f"  threshold  : {settings.recognition_threshold}")
+        print(f"  liveness   : {settings.liveness_timeout}s timeout")
+        print(f"  storage    : {settings.storage_backend}")
+        print(f"  enrolled   : {len(users)} user(s)"
+              + (f" — {', '.join(users)}" if users else ""))
+        return 0
 
     # ── delete ───────────────────────────────────────────────────────────
     if args.command == "delete":
