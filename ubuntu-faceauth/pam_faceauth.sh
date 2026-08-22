@@ -106,7 +106,7 @@ enrolled=0
 if [[ -f "$SQLITE_DB" ]]; then
     count=$(
         sqlite3 "$SQLITE_DB" \
-        "SELECT COUNT(*) FROM users WHERE username='$FACEAUTH_USER';" \
+        "SELECT COUNT(*) FROM enrollments WHERE username='$FACEAUTH_USER';" \
         2>/dev/null || echo 0
     )
 

@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+/* Dark security-dashboard theme tokens */
+:root {
+  --color-bg:       #0d1117;
+  --color-surface:  #161b22;
+  --color-border:   #30363d;
+  --color-text:     #c9d1d9;
+  --color-muted:    #8b949e;
+  --color-green:    #3fb950;
+  --color-red:      #f85149;
+  --color-yellow:   #d29922;
+  --color-blue:     #58a6ff;
+  --color-purple:   #bc8cff;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: ui-monospace, 'JetBrains Mono', 'Fira Code', Consolas, monospace;
+  font-size: 14px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar        { width: 6px; height: 6px; }
+::-webkit-scrollbar-track  { background: var(--color-bg); }
+::-webkit-scrollbar-thumb  { background: var(--color-border); border-radius: 3px; }

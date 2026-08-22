@@ -174,6 +174,17 @@ def build_parser() -> argparse.ArgumentParser:
         help="Number of recent events to show (default: 20)",
     )
 
+    # ── api ──────────────────────────────────────────────────────────────
+    api_p = sub.add_parser("api", help="Start the local REST API server")
+    api_p.add_argument(
+        "--host", default="127.0.0.1",
+        help="Bind address (default: 127.0.0.1)",
+    )
+    api_p.add_argument(
+        "--port", type=int, default=8765,
+        help="TCP port (default: 8765)",
+    )
+
     # ── liveness ─────────────────────────────────────────────────────────
     live_p = sub.add_parser(
         "liveness",
@@ -345,6 +356,15 @@ def main() -> int:
     # ── logs ─────────────────────────────────────────────────────────────
     if args.command == "logs":
         return run_logs(settings.log_file, limit=getattr(args, "limit", 20))
+
+    # ── api ──────────────────────────────────────────────────────────────
+    if args.command == "api":
+        from server import run_server
+        run_server(
+            host=getattr(args, "host", "127.0.0.1"),
+            port=getattr(args, "port", 8765),
+        )
+        return 0
 
     # ── delete ───────────────────────────────────────────────────────────
     if args.command == "delete":
